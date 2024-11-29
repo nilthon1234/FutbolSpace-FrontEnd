@@ -1,0 +1,17 @@
+.custom-table {
+    background-color: #007bff; 
+    color: white; 
+}
+
+.custom-table th, .custom-table td {
+    background-color: #007bff; 
+    color: white; 
+}
+
+.custom-table th {
+    border: 1px solid white; 
+}
+
+.custom-table td {
+    border: 1px solid white; 
+}

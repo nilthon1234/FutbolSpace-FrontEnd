@@ -1,0 +1,34 @@
+
+  <div class="container">
+    <div class="card">
+      <div class="card-body">
+        <form [formGroup]="adminForms" (submit)="onSubmit()" class="row g-3">
+            <h2 class="text-primary">
+                Register
+                </h2>
+
+            <div class="col-md-6">
+                <label for="inputEmail4" class="form-label">Email</label>
+                <input type="email" class="form-control" placeholder="example123@gmail.com" id="inputEmail4" formControlName="email">
+              </div>
+              <div class="col-md-6">
+                <label for="inputPassword4" class="form-label">Password</label>
+                <input type="password" class="form-control" placeholder="password..." id="inputPassword4" formControlName="password">
+              </div>
+              <div class="col-12">
+                <label for="Phone" class="form-label">Phone</label>
+                <input type="text" class="form-control" id="Phone" placeholder="phone" formControlName="phone">
+              </div>
+              <div class="col-12">
+                <label for="role" class="form-label">Role</label>
+                <input type="text" class="form-control" id="role" placeholder="role" formControlName="role">
+              </div>
+              <div class="col-12">
+                <button type="submit" class="btn btn-primary" [disabled]="adminForms.invalid">Sign in</button>
+                <a routerLink="/login-admin">Login</a>
+              </div>
+
+        </form>
+      </div>
+    </div>
+  </div>

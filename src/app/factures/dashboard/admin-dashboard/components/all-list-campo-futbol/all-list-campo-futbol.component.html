@@ -1,0 +1,32 @@
+<app-admin-navbar></app-admin-navbar>
+
+<button style="position: fixed; top: 60px; left: 10px;" type="button" class="btn btn-danger" (click)="onLogout()">Cerrar Sesión</button>
+<br><br>
+<table class="table custom-table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>DNI User</th>
+            <th>description</th>
+            <th>city</th>
+            <th>province</th>
+            <th>distric</th>
+            <th>estado</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="table-active"  *ngFor="let item of campoFutbol">
+            <td>{{item.id}}</td>
+            <td>{{item.dniUse}}</td>
+            <td>{{item.description}}</td>
+            <td>{{item.address}}</td>
+            <td>{{item.city}}</td>
+            <td>{{item.district}}</td>
+            <td>
+                <select name="estado" id="estado" [(ngModel)]="item.estado" (change)="updateEstado(item)">
+                    <option [value]="estado" *ngFor="let estado of ['HABILITADO', 'DESABILITADO']">{{estado}}</option>  
+                </select>
+            </td>
+        </tr>
+    </tbody>
+</table>
