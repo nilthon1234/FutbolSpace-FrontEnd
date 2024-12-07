@@ -31,10 +31,6 @@ ngOnInit(): void {
 }
 
 
-onLogout(){
-  localStorage.removeItem('token');
-  this.router.navigateByUrl('/login-admin');
-}
 
 
 listAllCampoFutbol():void{

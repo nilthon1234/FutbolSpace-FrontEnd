@@ -14,8 +14,12 @@ export class CampoFutbolService {
   campoAllList():Observable<CampoFutbol[]>{
     return this.http.get<CampoFutbol[]>(`${this.cfURL}/admin/list`)
   }
-
   updateEstado(campoFutbol: CampoFutbol):Observable<any>{
     return this.http.put(`${this.cfURL}/admin/actus/${campoFutbol.id}`, campoFutbol);
   }
+
+  addCampoFutbol(campoFutbol: CampoFutbol):Observable<any>{
+    return this.http.post(`${this.cfURL}/usu/add`, campoFutbol)
+  }
+
 }

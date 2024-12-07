@@ -1,1 +1,33 @@
-<p>all-list-user works!</p>
+<app-admin-navbar></app-admin-navbar>
+<br><br>
+<h1 style="top: 65px; left: 1%; position: fixed; font-size: 20px;">Usuario</h1>
+<table class="table custom-table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>NAME</th>
+            <th>LASTNAME</th>
+            <th>EMAIL</th>
+            <th>PASSWORD</th>
+            <th>DNI</th>
+            <th>PHONE</th>
+            <th>ESTADO</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="table-activite" *ngFor="let item of usuData">
+            <td>{{item.id}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.lastname}}</td>
+            <td>{{item.email}}</td>
+            <td>{{item.password}}</td>
+            <td>{{item.dni}}</td>
+            <td>{{item.phone}}</td>
+            <td>
+                <select name="estado" id="estado" [(ngModel)]="item.estado" (change)="updateEstado(item)">
+                    <option [value]="estado" *ngFor="let estado of ['Acces','NotAcces']">{{estado}}</option>
+                </select>
+            </td>
+        </tr>
+    </tbody>
+</table>

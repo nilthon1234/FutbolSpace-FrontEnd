@@ -1,0 +1,111 @@
+<app-usuario-navbar></app-usuario-navbar>
+<br>
+<div class="contenedor">
+    <!-- Columna izquierda: Campos de Fútbol -->
+    <div class="campos-futbol">
+        <h2>Tus Campos de Fútbol:</h2>
+        <ul *ngIf="usuario  && usuario.campoFutbol && usuario.campoFutbol.length > 0; else listaVacia">
+            <li *ngFor="let campo of usuario.campoFutbol">
+
+                <p style="display: none;"><strong>ID:</strong>{{campo.id}}</p>
+                <strong style="color: rgb(255, 81, 0);">{{ campo.description }}</strong><br>
+                <div class="campo-info">
+                    <p><strong class="part1">City:</strong>{{ campo.city }}</p>
+                    <p><strong class="part2">Province:</strong>{{ campo.province }}</p>
+                    <p><strong class="part3">District:</strong>{{ campo.district}}</p>
+                    <p><strong>Andress:</strong>{{ campo.address }}</p>
+                </div>
+                <p><strong>Estado:</strong>{{campo.estado}}</p>
+
+                <div *ngIf="campo.fileImagen && campo.fileImagen.length > 0">
+                    <h4>Imagenes</h4>
+                    <div *ngFor="let files of campo.fileImagen">
+                        <p>{{files.idCampoFutbol}}</p>
+                        <img [src]="files.imagen01Url" alt="" width="50">
+                        <img [src]="files.imagen02Url" alt="" width="50">
+                        <img [src]="files.imagen03Url" alt="" width="50">
+                    </div>
+
+                </div>
+
+                <button class="btn btn-secondary" (click)="showFormImage(campo.id)">Add Imagen</button>
+            </li>
+
+        </ul>
+        <ng-template #listaVacia><br><br>
+            <p class="lista-vacia">No tienes Campo de Futbol Registrado</p>
+        </ng-template>
+        <button class="btn btn-primary mt-3" (click)="mostrarFormulario()">New football field</button>
+    </div>
+
+    <!-- Columna derecha: Detalles del Usuario -->
+    <div class="usuario-detalles">
+        <h2>Usuario</h2>
+        <p><strong>Nombre:</strong> {{ usuario.name }} {{ usuario.lastname }}</p>
+        <p><strong>Teléfono:</strong> {{ usuario.phone }}</p>
+        <p><strong>Estado:</strong> {{ usuario.estado || 'Activo' }}</p>
+    </div>
+</div>
+<div *ngIf="formularioVisible" class="fondo-oscuro" (click)="ocultarFormulario()"></div>
+
+<!-- Formulario para agregar nuevo campo de fútbol -->
+<div *ngIf="formularioVisible" class="formulario-flotante">
+    <h2>Nuevo Campo de Fútbol</h2>
+    <form [formGroup]="formCampo" (ngSubmit)="agregarCampo()">
+        <div class="form-group" style="display: none;">
+            <label for="dniUse">DNI:</label>
+            <input type="text" class="form-control" id="dniUse" formControlName="dniUse" readonly>
+        </div>
+        <div class="form-group">
+            <label for="description">Descripción:</label>
+            <input type="text" class="form-control" id="description" formControlName="description">
+        </div>
+        <div class="form-group">
+            <label for="city">Ciudad:</label>
+            <input type="text" class="form-control" id="city" formControlName="city">
+        </div>
+        <div class="form-group">
+            <label for="province">Provincia:</label>
+            <input type="text" class="form-control" id="province" formControlName="province">
+        </div>
+        <div class="form-group">
+            <label for="district">Distrito:</label>
+            <input type="text" class="form-control" id="district" formControlName="district">
+        </div>
+        <div class="form-group">
+            <label for="address">Dirección:</label>
+            <input type="text" class="form-control" id="address" formControlName="address">
+        </div>
+        <button type="submit" class="btn btn-success mt-3">Agregar Campo</button>
+        <button type="button" class="btn btn-danger mt-3" (click)="ocultarFormulario()">Cancelar</button>
+    </form>
+</div>
+
+
+<div *ngIf="VisibleImageForm" class="fondo-oscuro" (click)="hideFormImage()"></div>
+
+<!-- Formulario para agregar imágenes -->
+<div *ngIf="VisibleImageForm" class="formulario-flotante">
+    <h2>Agregar Imágenes</h2>
+    <form [formGroup]="formFile" (ngSubmit)="addFile()">
+        <div class="form-group" style="display: none;">
+            <label for="idCampoFutbol">ID Campo Fútbol:</label>
+            <input type="text" class="form-control" id="idCampoFutbol" formControlName="idCampoFutbol" readonly>
+        </div>
+        <div class="form-group">
+            <label for="imagen1">Imagen 1:</label>
+            <input type="file" class="form-control" id="imagen1" (change)="onFileChange($event, 'imagen1')">
+        </div>
+        <div class="form-group">
+            <label for="imagen2">Imagen 2:</label>
+            <input type="file" class="form-control" id="imagen2" (change)="onFileChange($event, 'imagen2')">
+        </div>
+        <div class="form-group">
+            <label for="imagen3">Imagen 3:</label>
+            <input type="file" class="form-control" id="imagen3" (change)="onFileChange($event, 'imagen3')">
+        </div>
+
+        <button type="submit" class="btn btn-success mt-3">Agregar Imágenes</button>
+        <button type="button" class="btn btn-danger mt-3" (click)="hideFormImage()">Cancelar</button>
+    </form>
+</div>

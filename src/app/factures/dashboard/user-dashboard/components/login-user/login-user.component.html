@@ -1,0 +1,42 @@
+<div class="login-container">
+    <div class="login-box">
+      <div class="mb-4">
+        <h2 class="text-success">Log in User</h2>
+        <div>
+          Don't have an account?
+          <a routerLink="/register-user" class="text-success">Sign up</a>
+        </div>
+      </div>
+      <form [formGroup]="loginForm" (ngSubmit)="login()">
+        <label class="mb-3">
+          <input
+            type="number"
+            autocomplete="off"
+            class="form-control bg-body-secondary"
+            placeholder="Dni"
+            formControlName="dni"
+          />
+          <div *ngIf="loginForm.get('dni')?.invalid && loginForm.get('dni')?.touched" class="text-danger">
+            Email is required and must be valid.
+          </div>
+        </label>
+        <label class="mb-3">
+          <input
+            type="password"
+            class="form-control bg-body-secondary"
+            placeholder="Password"
+            formControlName="password"
+          />
+          <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="text-danger">
+            Password is required.
+          </div>
+        </label>
+        <div class="mt-4">
+          <button type="submit" class="btn btn-success w-100 rounded-3">
+            Log in
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  

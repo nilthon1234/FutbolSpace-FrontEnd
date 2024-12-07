@@ -1,3 +1,5 @@
+import { FileImagen } from "./file-imagen";
+
 export interface CampoFutbol {
     id:          number;
     dniUse:      number;
@@ -7,4 +9,5 @@ export interface CampoFutbol {
     province:    string;
     district:    string;
     estado:      string;
+    fileImagen?: FileImagen[],
 }

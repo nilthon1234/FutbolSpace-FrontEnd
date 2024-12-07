@@ -1,0 +1,39 @@
+.custom-table {
+  background-color: cornflowerblue; 
+  color: white; 
+}
+
+.custom-table th, .custom-table td {
+  background-color: cornflowerblue; 
+  color: white; 
+}
+
+.custom-table th {
+  border: 1px solid white; 
+}
+
+.custom-table td {
+  border: 1px solid white; 
+}
+
+
+
+h1 {
+    top: 65px;
+    left: 42%;
+    position: fixed;
+    font-size: 20px;
+    animation: bounce 2s infinite;
+  }
+
+  @keyframes bounce {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }

@@ -1,0 +1,24 @@
+<app-admin-navbar></app-admin-navbar>
+<br><br>
+<h1 style="top: 65px; left: 1%; position: fixed; font-size: 20px;">Client</h1>
+<table class="table custom-table">
+    <thead>
+        <tr>
+            <th>NAME</th>
+            <th>LASTNAME</th>
+            <th>dni</th>
+            <th>PHONE</th>
+            <th>EMAIL</th>
+        </tr>
+
+    </thead>
+    <tbody>
+        <tr class="table-active" *ngFor="let item of listClien">
+            <td>{{item.name}}</td>
+            <td>{{item.lastname}}</td>
+            <td>{{item.dni}}</td>
+            <td>{{item.phone}}</td>
+            <td>{{item.email}}</td>
+        </tr>
+    </tbody>
+</table>

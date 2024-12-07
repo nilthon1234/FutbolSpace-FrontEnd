@@ -1,0 +1,87 @@
+.contenedor {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+  padding: 20px;
+}
+
+.campos-futbol {
+  background-color: #f9f9f9;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.usuario-detalles {
+  background-color: #f1f1f1;
+  padding: 15px;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+}
+
+.campos-futbol h2,
+.usuario-detalles h2 {
+  margin-top: 0;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+strong {
+  color: #333;
+}
+
+.campo-info {
+  display: flex;
+  gap: 29px;
+}
+
+.lista-vacia {
+  text-align: center;
+  color: darkgray;
+}
+
+
+/* Estilo para el contenedor del formulario flotante */
+.formulario-flotante {
+  position: fixed; 
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%); 
+  background-color: white; 
+  border: 1px solid #ccc; 
+  padding: 20px; 
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3); 
+  z-index: 1000; 
+}
+
+/* Estilo para el fondo oscuro detrás del formulario */
+.fondo-oscuro {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%; 
+  height: 100%;
+  background-color: rgba(0,0,0,0.5); 
+  z-index: 999; 
+}
+
+
+
+/* Media Queries para hacer la página responsive */
+@media (max-width: 768px) {
+  .contenedor {
+      grid-template-columns: 1fr; 
+  }
+
+  .campo-info {
+      flex-direction: column; /* Cambia a columna en pantallas pequeñas */
+      gap: 10px;
+  }
+}

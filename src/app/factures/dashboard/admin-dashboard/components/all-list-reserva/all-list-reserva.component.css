@@ -1,10 +1,10 @@
 .custom-table {
-    background-color: #007bff; 
+    background-color: rgb(78, 184, 226); 
     color: white; 
 }
 
 .custom-table th, .custom-table td {
-    background-color: #007bff; 
+    background-color: rgb(78, 184, 226); 
     color: white; 
 }
 

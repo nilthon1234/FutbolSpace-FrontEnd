@@ -16,15 +16,17 @@
               Listas
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">Reservas</a></li>
+              <li><a class="dropdown-item" routerLink="/list-reserva">Reservas</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Campo-Futbol</a></li>
+              <li><a class="dropdown-item" routerLink="/list-campofutbol">Campo-Futbol</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Clientes</a></li>
+              <li><a class="dropdown-item" routerLink="/list-client">Clientes</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" routerLink="/list-user" routerLinkActive="router-link-active" >Usuario</a></li>
             </ul>
           </li>
           <li class="nav-item">
-            <a style="text-align: center; margin-left: 450%; color: black;" class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Administrador</a>
+            <a style="text-align: center; margin-left: 470%; color: black;" class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Administrador</a>
           </li>
         </ul>
         <form class="d-flex">
@@ -34,3 +36,5 @@
       </div>
     </div>
   </nav>
+  
+<button style="position: fixed; top: 60px; left: 93%;" type="button" class="btn btn-danger" (click)="onLogout()">Cerrar Sesión</button>
