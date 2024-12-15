@@ -5,6 +5,6 @@ export interface Client {
     dni:      number;
     phone:    number;
     email:    string;
-    password: null;
+    password: string;
 }
 

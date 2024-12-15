@@ -1,0 +1,18 @@
+<div class="container mt-5">
+    <h1>Listado de Campos de Futbol</h1><br>
+    <div class="row " >
+      <div class="col-md-4 col-sm-6" *ngFor="let campo of listCampo">
+        <div class="card mb-4">
+          <div class="card-body">
+            <p class="card-text">description:{{campo.description}}</p>
+            <p class="card-text">Dni: {{ campo.dniUse }}</p>
+            <p class="card-text">
+              city: {{ campo.city }}
+            </p>
+            <p class="card-text">province: {{ campo.province }}</p>
+            <p class="card-text">Distric: {{ campo.district }}</p></div>
+            <button type="button" class="btn btn-primary" (click)="seeDetails(campo.id!)">See Details</button>
+        </div>
+      </div>
+    </div>
+  </div>

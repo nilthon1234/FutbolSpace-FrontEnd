@@ -1,4 +1,5 @@
 import { FileImagen } from "./file-imagen";
+import { Reserva } from "./reserva";
 
 export interface CampoFutbol {
     id:          number;
@@ -9,5 +10,6 @@ export interface CampoFutbol {
     province:    string;
     district:    string;
     estado:      string;
+    reservas?: Reserva[],
     fileImagen?: FileImagen[],
 }

@@ -1,0 +1,48 @@
+<div class="overlay">
+  <div class="form-container">
+    <h2>Añadir Reserva para el Campo #{{ campoId }}</h2>
+    <form [formGroup]="formReserva" (ngSubmit)="addReservas()">
+      <!-- Fecha -->
+      <div>
+        <label for="fecha">Fecha:</label>
+        <input id="fecha" type="date" formControlName="fecha" [min]="minDate" />
+      </div>
+
+      <!-- DNI del Cliente -->
+      <div>
+        <label for="dniCliente">DNI Cliente:</label>
+        <input id="dniCliente" type="text" formControlName="dniCliente" readonly />
+      </div>
+
+      <!-- Hora Inicio -->
+      <div>
+        <label for="horaInicio">Hora Inicio:</label>
+        <select id="horaInicio" formControlName="horaInicio">
+          <option *ngFor="let hora of horas" [value]="hora">{{ hora }}</option>
+        </select>
+      </div>
+
+
+
+      <div>
+        <label for="horaFin">Hora Fin:</label>
+        <select id="horaFin" formControlName="horaFin">
+          <option *ngFor="let hora of horas" [value]="hora">{{ hora }}</option>
+        </select>
+      </div>
+
+
+
+
+      <!-- Campo de Fútbol -->
+      <div>
+        <label for="campoFutbol">Campo de Fútbol:</label>
+        <input id="campoFutbol" type="text" formControlName="campoFutbol" readonly />
+      </div>
+      <div class="button-container">
+        <button  routerLinkActive="router-link-active"  type="submit">Guardar</button>
+        <button type="button" (click)="close()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>

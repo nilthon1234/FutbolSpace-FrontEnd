@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MainNavbarComponent } from './main-navbar.component';
+import { ReservaClientComponent } from './reserva-client.component';
 
-describe('MainNavbarComponent', () => {
-  let component: MainNavbarComponent;
-  let fixture: ComponentFixture<MainNavbarComponent>;
+describe('ReservaClientComponent', () => {
+  let component: ReservaClientComponent;
+  let fixture: ComponentFixture<ReservaClientComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MainNavbarComponent]
+      imports: [ReservaClientComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(MainNavbarComponent);
+    fixture = TestBed.createComponent(ReservaClientComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

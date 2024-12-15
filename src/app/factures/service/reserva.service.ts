@@ -15,4 +15,9 @@ export class ReservaService {
     return this.http.get<Reserva[]>(`${this.rvUrl}/admin/list-reserva`)
   }
 
+  //para los client
+  addReserva(reserva: Reserva):Observable<any>{
+    return this.http.post<any>(`${this.rvUrl}/client/register`, reserva)
+  }
+
 }

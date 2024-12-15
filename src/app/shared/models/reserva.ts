@@ -1,6 +1,6 @@
 export interface Reserva {
     id:          number;
-    fecha:       Date;
+    fecha:       string;
     horaInicio:  string;
     horaFin:     string;
     dniCliente:  number;
