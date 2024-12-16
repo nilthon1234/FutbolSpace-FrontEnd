@@ -56,7 +56,22 @@ export class DetallsCampoFutbolComponent implements OnInit {
   closeModel(){
     this.showModel = false;
   }
-
+  //para actualizar los detalles al  resrvar un nuevo reserva
+  actualizarReservas(nuevaReserva: any) {
+    const id = this.campoFutbol.id;
+    if (id) {
+      this.campoFutbolService.getCampoAndReserva(id).subscribe(
+        (data: CampoFutbol) => {
+          this.campoFutbol = data; // Actualiza con los datos del backend
+        },
+        (error) => {
+          console.error('Error al actualizar reservas:', error);
+        }
+      );
+    }
+  }
+  
+  
 
 
   //para las  fechas intall consola { npm install date-fns }

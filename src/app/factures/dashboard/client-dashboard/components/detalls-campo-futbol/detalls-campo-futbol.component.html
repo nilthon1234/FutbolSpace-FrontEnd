@@ -3,15 +3,15 @@
   <div class="frame1">
     <h1>Campo Futbol</h1>
     @if (campoFutbol) {
-      <div class="campo-info">
-        <p><strong>ID:</strong> {{ campoFutbol.id }}</p>
-        <p><strong>Usuario:</strong> {{ campoFutbol.dniUse }}</p>
-        <p><strong>Dirección:</strong> {{ campoFutbol.address }}</p>
-        <p><strong>Ciudad:</strong> {{ campoFutbol.city }}</p>
-        <p><strong>Provincia:</strong> {{ campoFutbol.province }}</p>
-        <p><strong>Distrito:</strong> {{ campoFutbol.district }}</p>
-        <p><strong>Descripción:</strong> {{ campoFutbol.description }}</p>
-      </div>
+    <div class="campo-info">
+      <p><strong>ID:</strong> {{ campoFutbol.id }}</p>
+      <p><strong>Usuario:</strong> {{ campoFutbol.dniUse }}</p>
+      <p><strong>Dirección:</strong> {{ campoFutbol.address }}</p>
+      <p><strong>Ciudad:</strong> {{ campoFutbol.city }}</p>
+      <p><strong>Provincia:</strong> {{ campoFutbol.province }}</p>
+      <p><strong>Distrito:</strong> {{ campoFutbol.district }}</p>
+      <p><strong>Descripción:</strong> {{ campoFutbol.description }}</p>
+    </div>
     }
   </div>
 
@@ -20,32 +20,32 @@
     <h3>Reservas</h3>
     <div class="reservas-list">
       @for (reserva of campoFutbol.reservas; track reserva) {
-        @if (isToday(reserva.fecha)) {
-          <div class="reserva-item">
-            <h4>Hoy</h4>
-            <p><strong>Fecha:</strong> {{ reserva.fecha }}</p>
-            <p><strong>Inicio:</strong> {{ reserva.horaInicio }}</p>
-            <p><strong>Fin:</strong> {{ reserva.horaFin }}</p>
-          </div>
-        }
-        @if (isTomorrow(reserva.fecha)) {
-          <div class="reserva-item">
-            <h5>Reservas de Mañana</h5>
-            <p><strong>Fecha:</strong> {{ reserva.fecha }}</p>
-            <p><strong>Inicio:</strong> {{ reserva.horaInicio }}</p>
-            <p><strong>Fin:</strong> {{ reserva.horaFin }}</p>
-          </div>
-        }
-        @if (isDayAfterTomorrow(reserva.fecha)) {
-          <div class="reserva-item">
-            <h5>Reservas Pasado Mañana</h5>
-            <p><strong>Fecha:</strong> {{ reserva.fecha }}</p>
-            <p><strong>Inicia:</strong> {{ reserva.horaInicio }}</p>
-            <p><strong>Finaliza:</strong> {{ reserva.horaFin }}</p>
-          </div>
-        }
+      @if (isToday(reserva.fecha)) {
+      <div class="reserva-item">
+        <h4>Hoy</h4>
+        <p><strong>Fecha:</strong> {{ reserva.fecha }}</p>
+        <p><strong>Inicio:</strong> {{ reserva.horaInicio }}</p>
+        <p><strong>Fin:</strong> {{ reserva.horaFin }}</p>
+      </div>
+      }
+      @if (isTomorrow(reserva.fecha)) {
+      <div class="reserva-item">
+        <h5>Reservas de Mañana</h5>
+        <p><strong>Fecha:</strong> {{ reserva.fecha }}</p>
+        <p><strong>Inicio:</strong> {{ reserva.horaInicio }}</p>
+        <p><strong>Fin:</strong> {{ reserva.horaFin }}</p>
+      </div>
+      }
+      @if (isDayAfterTomorrow(reserva.fecha)) {
+      <div class="reserva-item">
+        <h5>Reservas Pasado Mañana</h5>
+        <p><strong>Fecha:</strong> {{ reserva.fecha }}</p>
+        <p><strong>Inicia:</strong> {{ reserva.horaInicio }}</p>
+        <p><strong>Finaliza:</strong> {{ reserva.horaFin }}</p>
+      </div>
+      }
       } @empty {
-        <p>No hay reservas disponibles.</p>
+      <p>No hay reservas disponibles.</p>
       }
     </div>
   </div>
@@ -55,18 +55,16 @@
     <h4>Imágenes</h4>
     <div class="imagenes-grid">
       @for (file of campoFutbol.fileImagen; track file) {
-        <img [src]="file.imagen01Url" alt="Imagen 1" class="imagen-item">
-        <img [src]="file.imagen02Url" alt="Imagen 2" class="imagen-item">
-        <img [src]="file.imagen03Url" alt="Imagen 3" class="imagen-item">
+      <img [src]="file.imagen01Url" alt="Imagen 1" class="imagen-item">
+      <img [src]="file.imagen02Url" alt="Imagen 2" class="imagen-item">
+      <img [src]="file.imagen03Url" alt="Imagen 3" class="imagen-item">
       } @empty {
-        <p>No hay imágenes disponibles.</p>
+      <p>No hay imágenes disponibles.</p>
       }
     </div>
   </div>
   <button class=" btn btn-success" (click)="openModel()">Add Reserva</button>
-  <app-add-reserva 
-  *ngIf="showModel"
-  [campoId]="campoFutbol.id"
-  (closeModel)="closeModel()" 
-  ></app-add-reserva>
+  <app-add-reserva *ngIf="showModel" [campoId]="campoFutbol.id" (closeModel)="closeModel()"
+    (reservaAgregada)="actualizarReservas($event)">
+  </app-add-reserva>
 </div>

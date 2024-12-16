@@ -4,6 +4,7 @@ import { ReservaService } from '../../../../service/reserva.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
+import { Reserva } from '../../../../../shared/models/reserva';
 
 @Component({
   selector: 'app-add-reserva',
@@ -15,6 +16,9 @@ import { CommonModule } from '@angular/common';
 export class AddReservaComponent implements OnInit {
   @Input() campoId: number = 0;
   @Output() closeModel = new EventEmitter<void>();
+  //para actualizar la pagina despues de agregar la reserva
+  @Output() reservaAgregada = new EventEmitter<void>();
+
   //para el minimo de hoy en andelante [fecha]
   minDate: string = '0';
   //para las horas de 00
@@ -71,9 +75,11 @@ export class AddReservaComponent implements OnInit {
     if (this.formReserva.valid) {
       const reserva = this.formReserva.value;
       this.reservaService.addReserva(reserva).subscribe({
-        next: () => {
+        next: (response) => {
           this.toastr.success('Tu reserva fue registrata', 'EXITOSO');
+          this.reservaAgregada.emit(response);
           this.close();
+
         },
         error: (err) => {
           if(err.error && typeof err.error === 'string'){
