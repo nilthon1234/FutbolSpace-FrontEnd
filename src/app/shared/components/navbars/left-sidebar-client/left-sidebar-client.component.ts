@@ -1,7 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component, input, output } from '@angular/core';
-import { RouterLink, RouterModule } from '@angular/router';
+import {Router, RouterLink, RouterModule} from '@angular/router';
+import {ClientService} from "../../../../factures/service/client.service";
+import {ToastrService} from "ngx-toastr";
 
+interface NavItem {
+  RouterLink?: string;
+  icon: string;
+  label: string;
+}
 @Component({
   selector: 'app-left-sidebar-client',
   standalone: true,
@@ -10,11 +17,26 @@ import { RouterLink, RouterModule } from '@angular/router';
   styleUrl: './left-sidebar-client.component.css'
 })
 export class LeftSidebarClientComponent {
-  
+
+
+  constructor(
+    private clientService: ClientService,
+    private router: Router,
+    private toastr: ToastrService,
+  ) {
+  }
+
   isLeftSidebarCollapsed = input.required<boolean>();
   changeIsSidebarCollapsed = output<boolean>();
-  
-  items = [
+
+  //cerrar session
+  logout(): void {
+    this.clientService.logoutClient();
+    this.router.navigate(['login-client']);
+    this.toastr.success('Se cerro Sesion')
+  }
+
+  items : NavItem[]= [
     {
       RouterLink: 'home-client',
       icon: 'fa fa-home',
@@ -24,9 +46,13 @@ export class LeftSidebarClientComponent {
       RouterLink: 'reserva-client',
       icon: 'fal fa-box-open',
       label: 'My Reserva'
+    },
+    {
+      icon: 'fa fa-sign-out',  // Puedes agregar un ícono apropiado
+      label: 'Cerrar Sesion',
     }
   ]
-  
+
   toggleCollapse() {
 
     this.changeIsSidebarCollapsed.emit(!this.isLeftSidebarCollapsed());

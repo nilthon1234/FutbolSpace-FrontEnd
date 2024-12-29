@@ -2,14 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CampoFutbol } from '../../shared/models/campoFutbol';
 import { Observable } from 'rxjs';
-import { Reserva } from '../../shared/models/reserva';
-
 @Injectable({
   providedIn: 'root'
 })
 export class CampoFutbolService {
   private cfURL = 'http://localhost:8080/campo'
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+  ) {}
 
   //para lado de los administradores
   campoAllList():Observable<CampoFutbol[]>{
@@ -32,7 +32,4 @@ export class CampoFutbolService {
   getCampoAndReserva(id: number): Observable<CampoFutbol>{
     return this.http.get<CampoFutbol>(`${this.cfURL}/client/detalls/${id}`);
   }
-
-
-
 }

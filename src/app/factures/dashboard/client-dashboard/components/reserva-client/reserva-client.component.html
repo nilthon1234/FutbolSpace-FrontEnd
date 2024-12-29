@@ -1,1 +1,43 @@
-<p>reserva-client works!</p>
+<div class="container">
+
+    <!-- Sección de Reservas -->
+    <div class="reservas">
+        <h2>Reservas</h2>
+        <ul *ngIf="client && client.reservas && client.reservas.length > 0; else listaVacia">
+            <div *ngFor="let reserva of client.reservas" class="reserva-item">
+                <p><strong>ID:</strong> <span>{{reserva.id}}</span></p>
+                <p><strong>Fecha:</strong> <span>{{reserva.fecha}}</span></p>
+                <p><strong>Hora Inicio:</strong> <span>{{reserva.horaInicio}}</span></p>
+                <p><strong>Hora Fin:</strong> <span>{{reserva.horaFin}}</span></p>
+
+                <!-- Campo Futbol -->
+                <div *ngIf="reserva.campoFutbols && reserva.campoFutbols.length > 0">
+                    <h5>Campo de Fútbol</h5>
+                    <div *ngFor="let item of reserva.campoFutbols" class="campo-item">
+                        <p><strong>Descripción:</strong> <span>{{item.description}}</span></p>
+                        <p><strong>Dirección:</strong> <span>{{item.address}}</span></p>
+                        <p><strong>Ciudad:</strong> <span>{{item.city}}</span></p>
+                        <p><strong>Provincia:</strong> <span>{{item.province}}</span></p>
+                        <p><strong>Distrito:</strong> <span>{{item.district}}</span></p>
+                    </div>
+                </div>
+            </div>
+        </ul>
+
+        <!-- Mensaje si no hay reservas -->
+        <ng-template #listaVacia>
+            <p>No hay reservas disponibles.</p>
+        </ng-template>
+
+    </div>
+
+    <!-- Sección del Cliente -->
+    <div class="cliente">
+        <h3>Cliente</h3>
+        <p><strong>Nombre:</strong> <span>{{client.name}}</span></p>
+        <p><strong>Apellido:</strong> <span>{{client.lastname}}</span></p>
+        <p><strong>DNI:</strong> <span>{{client.dni}}</span></p>
+    </div>
+
+
+</div>

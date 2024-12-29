@@ -23,7 +23,7 @@ export class ClientService {
   isAuthenticateds(): boolean {
     return this.isAuthenticated;
   }
-  //eliminar el dni dellocal store
+  //eliminar el dni del local store
   logoutClient():void{
     this.isAuthenticated = false;
     localStorage.removeItem('dni');
@@ -42,6 +42,9 @@ export class ClientService {
         }
       })
     )
+  }
+  getClientReservaAndCampo(dni: number):Observable<Client>{
+    return this.http.get<Client>(`${this.cliUrl}/client/${dni}`)
   }
 
 }

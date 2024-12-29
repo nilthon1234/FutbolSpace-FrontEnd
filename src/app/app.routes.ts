@@ -11,17 +11,17 @@ import { AllListReservaComponent } from './factures/dashboard/admin-dashboard/co
 
 export const routes: Routes = [
     //navBar
-    {path: 'admin', component: AdminNavbarComponent },
+    {path: 'admin',title: 'Administrator', component: AdminNavbarComponent },
     {path: 'usu', component: UsuarioNavbarComponent},
     //auth JWT
-    {path: 'login-admin', component: AdminLoginComponent},
-    {path: 'register-admin', component: AdminRegisterComponent},
+    {path: 'login-admin',title: 'Administrator', component: AdminLoginComponent},
+    {path: 'register-admin',title: 'Administrator', component: AdminRegisterComponent},
     {path: '', redirectTo: "/login-admin",pathMatch:  'full'},
     //canActivate guards -> , canActivate: [adminGuard]
-    {path: 'list-campofutbol', component: AllListCampoFutbolComponent, canActivate: [adminGuard]},
-    {path: 'list-user', component:AllListUserComponent, canActivate: [adminGuard]},
-    {path: 'list-client', component:AllListClientComponent, canActivate: [adminGuard]},
-    {path: 'list-reserva', component:AllListReservaComponent, canActivate: [adminGuard]},
+    {path: 'list-campofutbol',title: 'Administrator', component: AllListCampoFutbolComponent, canActivate: [adminGuard]},
+    {path: 'list-user',title: 'Administrator', component:AllListUserComponent, canActivate: [adminGuard]},
+    {path: 'list-client',title: 'Administrator', component:AllListClientComponent, canActivate: [adminGuard]},
+    {path: 'list-reserva',title: 'Administrator', component:AllListReservaComponent, canActivate: [adminGuard]},
 
     
 

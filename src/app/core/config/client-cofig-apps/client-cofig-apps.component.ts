@@ -1,13 +1,13 @@
 import { Component, HostListener, Inject, OnInit, PLATFORM_ID, signal } from '@angular/core';
 import { LeftSidebarClientComponent } from "../../../shared/components/navbars/left-sidebar-client/left-sidebar-client.component";
 import { MainClientComponent } from "../../../factures/dashboard/client-dashboard/components/main-client/main-client.component";
-import { RouterOutlet } from '@angular/router';
+
 import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-client-cofig-apps',
   standalone: true,
-  imports: [LeftSidebarClientComponent, MainClientComponent],
+  imports: [LeftSidebarClientComponent, MainClientComponent,],
   templateUrl: './client-cofig-apps.component.html',
   styleUrl: './client-cofig-apps.component.css'
 })

@@ -1,28 +1,37 @@
 <div class="sidenav" [ngClass]="isLeftSidebarCollapsed() ? 'sidenav-collapsed' : ''">
-    <div class="logo-container" (click)="toggleCollapse()">
-        <button class="logo" (click)="toggleCollapse()">
-            <i class="fal fa-bars"></i>
-        </button>
-        @if (!isLeftSidebarCollapsed()) {
-            
-            <div class="logo-text">CLIENTE</div>
-            <button class="btn-close" (click)="closeSidenav()">
-                <i class="fal fa-times close-icon"></i>
-            </button>
+  <div class="logo-container" (click)="toggleCollapse()">
+    <button class="logo" (click)="toggleCollapse()">
+      <i class="fal fa-bars"></i>
+    </button>
+    @if (!isLeftSidebarCollapsed()) {
+      <div class="logo-text">CLIENTE</div>
+      <button class="btn-close" (click)="closeSidenav()">
+        <i class="fal fa-times close-icon"></i>
+      </button>
+    }
+  </div>
+  <div class="sidenav-nav">
+    @for (item of items; track $index) {
+      <li class="sidenav-nav-item">
+        <!-- Si el item tiene RouterLink, usamos la navegación normal -->
+        @if (item.RouterLink) {
+          <a class="sidenav-nav-link" [routerLink]="[item.RouterLink]" routerLinkActive="active"
+             [routerLinkActiveOptions]="{exact: true}">
+            <i class="sidenav-link-icon" [class]="item.icon"></i>
+            @if (!isLeftSidebarCollapsed()) {
+              <span class="sidenav-link-text">{{item.label}}</span>
+            }
+          </a>
+        } @else {
+          <!-- Si no tiene RouterLink, asumimos que es el botón de logout -->
+          <a class="sidenav-nav-link" (click)="logout()" style="cursor: pointer">
+            <i class="sidenav-link-icon" [class]="item.icon"></i>
+            @if (!isLeftSidebarCollapsed()) {
+              <span class="sidenav-link-text">{{item.label}}</span>
+            }
+          </a>
         }
-    </div>
-    <div class="sidenav-nav">
-        @for (item of items; track $index) {
-        <li class="sidenav-nav-item">
-            <a class="sidenav-nav-link" [routerLink]="item.RouterLink" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                <i class="sidenav-link-icon" [class]="item.icon"></i>
-                @if (!isLeftSidebarCollapsed()) {
-
-                    <span class="sidenav-link-text">{{item.label}}</span>
-                }
-            </a>
-        </li>
-        }
-
-    </div>
+      </li>
+    }
+  </div>
 </div>

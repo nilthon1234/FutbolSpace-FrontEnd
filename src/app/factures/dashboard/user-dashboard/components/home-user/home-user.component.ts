@@ -9,7 +9,6 @@ import { Usuario } from '../../../../../shared/models/usuario';
 import { CampoFutbolService } from '../../../../service/campo-futbol.service';
 import { CampoFutbol } from '../../../../../shared/models/campoFutbol';
 import { FileService } from '../../../../service/file.service';
-import { error } from 'console';
 
 @Component({
   selector: 'app-home-user',
@@ -181,6 +180,12 @@ export class HomeUserComponent implements OnInit {
       this.toastr.error('Formulario no válido');
     }
   }
+  
+  hasImages(campo: CampoFutbol): boolean {
+    return !!campo.fileImagen && campo.fileImagen.length > 0;
+}
+
+  
 
 
   //configuracion para los archivos 

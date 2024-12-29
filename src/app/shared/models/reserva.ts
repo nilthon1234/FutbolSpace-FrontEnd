@@ -1,3 +1,5 @@
+import { CampoFutbol } from "./campoFutbol";
+
 export interface Reserva {
     id:          number;
     fecha:       string;
@@ -5,4 +7,5 @@ export interface Reserva {
     horaFin:     string;
     dniCliente:  number;
     campoFutbol: number;
+    campoFutbols?: CampoFutbol[];
 }

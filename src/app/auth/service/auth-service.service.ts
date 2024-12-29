@@ -12,7 +12,6 @@ export class AuthServiceService {
   private authUrl = 'http://localhost:8080/auth'
 
   constructor(private http: HttpClient) { }
-//si estamos extraendo texto plano en el return cambiamos a any y espisificamos que es tipo 'text'
   registerAdmin(admin: Administrator):Observable<any>{
     return this.http.post(`${this.authUrl}/register`, admin,{responseType: 'text'});
   }

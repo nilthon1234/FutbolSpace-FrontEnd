@@ -5,9 +5,9 @@ import { HomeUserComponent } from "../components/home-user/home-user.component"
 import { UserGuard } from "../../../../core/guards/user.guard"
 
 export const routerUsu: Routes = [
-    {path: 'login-user', component: LoginUserComponent},
-    {path: 'register-user', component: RegisterUserComponent},
-    {path: 'home-user', component: HomeUserComponent, canActivate: [UserGuard]}
+    {path: 'login-user',title: 'Usuario', component: LoginUserComponent},
+    {path: 'register-user',title: 'Usuario', component: RegisterUserComponent},
+    {path: 'home-user',title: 'Usuario', component: HomeUserComponent, canActivate: [UserGuard]}
 
 
     

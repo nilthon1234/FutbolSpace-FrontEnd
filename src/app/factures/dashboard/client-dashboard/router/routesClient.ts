@@ -1,6 +1,5 @@
-import { Route, Router, Routes } from "@angular/router";
+import {  Routes } from "@angular/router";
 import { ClientCofigAppsComponent } from "../../../../core/config/client-cofig-apps/client-cofig-apps.component";
-import path from "path";
 import { HomeClientComponent } from "../components/home-client/home-client.component";
 import { ReservaClientComponent } from "../components/reserva-client/reserva-client.component";
 import { DetallsCampoFutbolComponent } from "../components/detalls-campo-futbol/detalls-campo-futbol.component";
@@ -14,13 +13,13 @@ export const routeClient : Routes = [
         component: ClientCofigAppsComponent, //contenedor principal del client
         children: [
             {path: '', redirectTo: 'home-client', pathMatch: 'full'},
-            {path: 'home-client', component: HomeClientComponent},
-            {path: 'reserva-client', component: ReservaClientComponent, },
-            {path: 'campo-details/:id', component: DetallsCampoFutbolComponent, },
-            {path: 'add-reserva', component: AddReservaComponent},
+            {path: 'home-client',title: 'Client', component: HomeClientComponent, canActivate: [clientGuard]},
+            {path: 'reserva-client',title: 'Client', component: ReservaClientComponent, canActivate: [clientGuard]},
+            {path: 'campo-details/:id',title: 'Client', component: DetallsCampoFutbolComponent,  canActivate: [clientGuard]},
+            {path: 'add-reserva',title: 'Client', component: AddReservaComponent},
         ]
      },
-     {path: 'register-client', component: ClientRegisterComponent},
-     {path: 'login-client', component: ClientLoginComponent}
-     
+     {path: 'register-client',title: 'Client', component: ClientRegisterComponent},
+     {path: 'login-client',title: 'Client', component: ClientLoginComponent}
+
 ]

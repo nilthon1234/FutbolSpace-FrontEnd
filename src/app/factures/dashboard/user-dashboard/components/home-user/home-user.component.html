@@ -28,7 +28,11 @@
 
                 </div>
 
-                <button class="btn btn-secondary" (click)="showFormImage(campo.id)">Add Imagen</button>
+                <button class="btn btn-secondary" [disabled]="hasImages(campo
+
+
+                    
+                )" (click)="showFormImage(campo.id)">Add Imagen</button>
             </li>
 
         </ul>

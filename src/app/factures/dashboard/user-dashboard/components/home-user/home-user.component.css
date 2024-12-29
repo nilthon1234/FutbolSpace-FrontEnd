@@ -71,6 +71,10 @@ strong {
   background-color: rgba(0,0,0,0.5); 
   z-index: 999; 
 }
+button:disabled {
+  background-color: #ddd; /* Color gris cuando está deshabilitado */
+  cursor: not-allowed;
+}
 
 
 

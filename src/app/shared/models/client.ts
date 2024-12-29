@@ -1,3 +1,5 @@
+import { Reserva } from "./reserva";
+
 export interface Client {
     id:       string;
     name:     string;
@@ -6,5 +8,8 @@ export interface Client {
     phone:    number;
     email:    string;
     password: string;
+    reservas?: Reserva[];
+
+
 }
 

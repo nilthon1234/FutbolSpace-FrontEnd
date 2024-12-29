@@ -5,12 +5,12 @@
     @if (campoFutbol) {
     <div class="campo-info">
       <p><strong>ID:</strong> {{ campoFutbol.id }}</p>
-      <p><strong>Usuario:</strong> {{ campoFutbol.dniUse }}</p>
       <p><strong>Dirección:</strong> {{ campoFutbol.address }}</p>
       <p><strong>Ciudad:</strong> {{ campoFutbol.city }}</p>
       <p><strong>Provincia:</strong> {{ campoFutbol.province }}</p>
       <p><strong>Distrito:</strong> {{ campoFutbol.district }}</p>
       <p><strong>Descripción:</strong> {{ campoFutbol.description }}</p>
+      <p><strong>Anddress:</strong> {{ campoFutbol.address}}</p>
     </div>
     }
   </div>
@@ -19,37 +19,50 @@
   <div class="frame2">
     <h3>Reservas</h3>
     <div class="reservas-list">
-      @for (reserva of campoFutbol.reservas; track reserva) {
-      @if (isToday(reserva.fecha)) {
-      <div class="reserva-item">
-        <h4>Hoy</h4>
-        <p><strong>Fecha:</strong> {{ reserva.fecha }}</p>
-        <p><strong>Inicio:</strong> {{ reserva.horaInicio }}</p>
-        <p><strong>Fin:</strong> {{ reserva.horaFin }}</p>
-      </div>
-      }
-      @if (isTomorrow(reserva.fecha)) {
-      <div class="reserva-item">
-        <h5>Reservas de Mañana</h5>
-        <p><strong>Fecha:</strong> {{ reserva.fecha }}</p>
-        <p><strong>Inicio:</strong> {{ reserva.horaInicio }}</p>
-        <p><strong>Fin:</strong> {{ reserva.horaFin }}</p>
-      </div>
-      }
-      @if (isDayAfterTomorrow(reserva.fecha)) {
-      <div class="reserva-item">
-        <h5>Reservas Pasado Mañana</h5>
-        <p><strong>Fecha:</strong> {{ reserva.fecha }}</p>
-        <p><strong>Inicia:</strong> {{ reserva.horaInicio }}</p>
-        <p><strong>Finaliza:</strong> {{ reserva.horaFin }}</p>
-      </div>
-      }
-      } @empty {
+      @if (!campoFutbol.reservas || campoFutbol.reservas.length === 0) {
       <p>No hay reservas disponibles.</p>
+      } @else {
+      @if (getReservasByDay().today!.length > 0) {
+      <div class="reserva-group">
+        <h5>Reservas de Hoy</h5>
+        @for (reserva of getReservasByDay().today; track reserva) {
+        <div class="reserva-item">
+          <p><strong>Fecha</strong>{{reserva.fecha}}</p>
+          <p><strong>Inicio:</strong> {{ reserva.horaInicio }}</p>
+          <p><strong>Fin:</strong> {{ reserva.horaFin }}</p>
+        </div>
+        }
+      </div>
+      }
+
+      @if (getReservasByDay().tomorrow!.length > 0) {
+      <div class="reserva-group">
+        <h5>Reservas de Mañana</h5>
+        @for (reserva of getReservasByDay().tomorrow; track reserva) {
+        <div class="reserva-item">
+          <p><strong>Fecha</strong>{{reserva.fecha}}</p>
+          <p><strong>Inicio:</strong> {{ reserva.horaInicio }}</p>
+          <p><strong>Fin:</strong> {{ reserva.horaFin }}</p>
+        </div>
+        }
+      </div>
+      }
+
+      @if (getReservasByDay().dayAfterTomorrow!.length > 0) {
+      <div class="reserva-group">
+        <h5>Reservas Pasado Mañana</h5>
+        @for (reserva of getReservasByDay().dayAfterTomorrow; track reserva) {
+        <div class="reserva-item">
+          <p><strong>Fecha</strong>{{reserva.fecha}}</p>
+          <p><strong>Inicio:</strong> {{ reserva.horaInicio }}</p>
+          <p><strong>Fin:</strong> {{ reserva.horaFin }}</p>
+        </div>
+        }
+      </div>
+      }
       }
     </div>
   </div>
-
   <!-- Frame 3: Imágenes -->
   <div class="frame3">
     <h4>Imágenes</h4>
@@ -63,8 +76,13 @@
       }
     </div>
   </div>
-  <button class=" btn btn-success" (click)="openModel()">Add Reserva</button>
+
+  <button class="btn btn-success" (click)="openModel()">Add Reserva</button>
+
   <app-add-reserva *ngIf="showModel" [campoId]="campoFutbol.id" (closeModel)="closeModel()"
-    (reservaAgregada)="actualizarReservas($event)">
+    (reservaAgregada)="actualizarPagina($event)">
   </app-add-reserva>
+
+
+  <!-- Resto del código sigue igual -->
 </div>

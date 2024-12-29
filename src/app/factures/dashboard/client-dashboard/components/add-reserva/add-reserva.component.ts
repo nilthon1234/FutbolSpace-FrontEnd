@@ -5,6 +5,9 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ToastrService } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
 import { Reserva } from '../../../../../shared/models/reserva';
+import { FormReservaService } from '../../../../../core/services/form-reserva.service';
+import { NotificationService } from '../../../../../core/services/notification.service';
+import { DateUtilService } from '../../../../../core/services/date-util.service';
 
 @Component({
   selector: 'app-add-reserva',
@@ -14,6 +17,7 @@ import { Reserva } from '../../../../../shared/models/reserva';
   styleUrl: './add-reserva.component.css'
 })
 export class AddReservaComponent implements OnInit {
+
   @Input() campoId: number = 0;
   @Output() closeModel = new EventEmitter<void>();
   //para actualizar la pagina despues de agregar la reserva
@@ -24,76 +28,59 @@ export class AddReservaComponent implements OnInit {
   //para las horas de 00
   horas: string[] = [];
 
-  formReserva: FormGroup;
-
+  formReserva: any;
   constructor(
+    private reservaFormService:FormReservaService,
     private reservaService: ReservaService,
-    private toastr: ToastrService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private fb: FormBuilder,
+    private notificationService: NotificationService,
+    private dateUtilService: DateUtilService
   ) {
-
-    this.formReserva = this.fb.group({
-      fecha: ['', [Validators.required,]],
-      horaInicio: ['', [Validators.required]],
-      horaFin: ['', [Validators.required]],
-      dniCliente: ['', [Validators.required]],
-      campoFutbol: ['', [Validators.required]]
-    })
-
+    // Delegate form creation to form service
+    this.formReserva = this.reservaFormService.createReserva();
+    
+    // Generate hours via date utility
+    this.horas = this.dateUtilService.generateHoraList();
+    
+    // Set minimum date
+    this.minDate = this.dateUtilService.getTodayMinDate();
   }
+
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
-      this.campoId = +params.get('id')! || 0; // El nombre de tu parámetro en la ruta
-      this.formReserva.patchValue({ campoFutbol: this.campoId });
-    });
-
-    //extraer el dni
-    const dniCliente = localStorage.getItem('dni');
-    if (dniCliente) {
-      this.formReserva.patchValue({ dniCliente: +dniCliente });
-    }
-    //fecha disponible de hoy en adelante 
-    const today = new Date();
-    //agustes de fecha zona Horari local
-    today.setMinutes(today.getMinutes() - today.getTimezoneOffset())
-    this.minDate = today.toISOString().split('T')[0];
-    //generar las horas de 00 
-    this.horas = Array.from({ length: 24 }, (_, i) => {
-      return `${i.toString().padStart(2, '0')}:00`;
-    });
-
+    this.initializeFormDefaults();
   }
 
-  close() {
+  private initializeFormDefaults(): void {
+    // Separate method for initializing form defaults
+    this.reservaFormService.setDefaultCampoId(this.formReserva, this.campoId);
+    this.reservaFormService.setDefaultClientDni(this.formReserva);
+  }
+
+  close(): void {
     this.closeModel.emit();
   }
 
-  //formulario
-  addReservas() {
+  addReservas(): void {
     if (this.formReserva.valid) {
-      const reserva = this.formReserva.value;
-      this.reservaService.addReserva(reserva).subscribe({
-        next: (response) => {
-          this.toastr.success('Tu reserva fue registrata', 'EXITOSO');
-          this.reservaAgregada.emit(response);
-          this.close();
-
-        },
-        error: (err) => {
-          if(err.error && typeof err.error === 'string'){
-            this.toastr.error(err.error, 'Error');
-          }else if(err.error && err.error.message) {
-            this.toastr.warning(err.error.message, 'Advertencia')
-          }
-        }
-      })
+      this.reservaService.addReserva(this.formReserva.value).subscribe({
+        next: this.handleSuccessfulReservation.bind(this),
+        error: this.handleReservationError.bind(this)
+      });
     } else {
-      this.toastr.warning('Campos incompletos', 'INCOMPLETO');
+      this.notificationService.showWarning('Campos incompletos', 'INCOMPLETO');
     }
+  }
 
+  private handleSuccessfulReservation(response: any): void {
+    this.notificationService.showSuccess('Tu reserva fue registrada', 'EXITOSO');
+    this.reservaAgregada.emit(response);
+    this.close();
+  }
+
+  private handleReservationError(err: any): void {
+    if (err.error && typeof err.error.message === 'string') {
+      this.notificationService.showWarning(err.error.message, 'Advertencia');
+    }
   }
   
 
-}
+} 
